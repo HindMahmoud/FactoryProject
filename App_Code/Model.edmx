@@ -1,0 +1,981 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FactoryDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="bank">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="value" Type="float" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="BankName" Type="nvarchar" MaxLength="50" />
+          <Property Name="roleType" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bank_account">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bank_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="bank_id" Type="nvarchar" MaxLength="50" />
+          <Property Name="daan" Type="float" />
+          <Property Name="mdeen" Type="float" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="datep" Type="datetime" />
+          <Property Name="typeRole" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="roleType" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="balance" Type="float" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="address" Type="nvarchar" MaxLength="255" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="roleType" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="customer_account">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="customer_id" Type="int" />
+          <Property Name="total" Type="float" />
+          <Property Name="pay" Type="float" />
+          <Property Name="repay" Type="float" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="user_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="inv_id" Type="int" />
+          <Property Name="img" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="destroy_inv">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="prod_id" Type="int" />
+          <Property Name="prod_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="inv_id" Type="int" />
+          <Property Name="stat" Type="int" />
+          <Property Name="roleType" Type="nvarchar" MaxLength="50" />
+          <Property Name="quant" Type="float" />
+          <Property Name="item_total" Type="float" />
+        </EntityType>
+        <EntityType Name="destroy_invoices">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date_destroy_inv" Type="datetime" />
+          <Property Name="total" Type="float" />
+          <Property Name="running_price" Type="float" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="user_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="roletype" Type="nvarchar" MaxLength="50" />
+          <Property Name="recycled_item" Type="int" />
+          <Property Name="recycled_item_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="recycled_quantity" Type="float" />
+          <Property Name="rec_id" Type="int" />
+        </EntityType>
+        <EntityType Name="import">
+          <Key>
+            <PropertyRef Name="add_id" />
+          </Key>
+          <Property Name="id" Type="int" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="total" Type="float" />
+          <Property Name="importer_id" Type="int" />
+          <Property Name="discount" Type="float" />
+          <Property Name="Net_total" Type="float" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="user_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="importer_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="add_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="roleType" Type="nvarchar" MaxLength="50" />
+          <Property Name="payedvalue" Type="float" />
+        </EntityType>
+        <EntityType Name="import_items">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="imp_id" Type="int" />
+          <Property Name="prod_code" Type="nvarchar" MaxLength="50" />
+          <Property Name="prod_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="quantity" Type="float" />
+          <Property Name="price" Type="float" />
+          <Property Name="total" Type="float" />
+          <Property Name="status" Type="int" />
+          <Property Name="ex_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="importer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="balance" Type="float" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" />
+          <Property Name="value" Type="float" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="address" Type="nvarchar" MaxLength="255" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="roleType" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="importer_account">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="importer_id" Type="int" />
+          <Property Name="importer_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="daan" Type="float" />
+          <Property Name="mdeen" Type="float" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="user_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="inv_id" Type="int" />
+        </EntityType>
+        <EntityType Name="invoice">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="total" Type="float" />
+          <Property Name="customer_id" Type="int" />
+          <Property Name="discount" Type="float" />
+          <Property Name="Nettotal" Type="float" />
+          <Property Name="img" Type="nvarchar(max)" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="user_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="customer_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="typeRole" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="casherid" Type="int" />
+          <Property Name="casherName" Type="nvarchar" MaxLength="50" />
+          <Property Name="payed" Type="float" />
+          <Property Name="inv_id" Type="int" />
+        </EntityType>
+        <EntityType Name="invoice_items">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="inv_id" Type="int" />
+          <Property Name="prod_code" Type="nvarchar" MaxLength="50" />
+          <Property Name="prod_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="quantity" Type="float" />
+          <Property Name="price" Type="float" />
+          <Property Name="cost" Type="float" />
+          <Property Name="total" Type="float" />
+          <Property Name="status" Type="int" />
+          <Property Name="NetTotal" Type="float" />
+        </EntityType>
+        <EntityType Name="payment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" />
+          <Property Name="value" Type="float" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="notes" Type="nvarchar" MaxLength="255" />
+          <Property Name="inv_id" Type="int" />
+          <Property Name="img" Type="nvarchar(max)" />
+          <Property Name="type" Type="nvarchar" MaxLength="50" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="user_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="roleType" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="return_items">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="return_id" Type="int" />
+          <Property Name="prod_code" Type="nvarchar" MaxLength="50" />
+          <Property Name="prod_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="quantity" Type="float" />
+          <Property Name="price" Type="float" />
+          <Property Name="total" Type="float" />
+          <Property Name="status" Type="int" />
+          <Property Name="roleType" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="returninv">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="total" Type="float" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="user_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="roleType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="inv_id" Type="int" />
+        </EntityType>
+        <EntityType Name="SalesMen">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="roleType" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="savee">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="title" Type="nvarchar" MaxLength="100" />
+          <Property Name="daan" Type="float" />
+          <Property Name="mdeen" Type="float" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="user_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="item_id" Type="nvarchar" MaxLength="50" />
+          <Property Name="Operation_type" Type="nvarchar" MaxLength="50" />
+          <Property Name="roleType" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="stock">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="nvarchar" MaxLength="50" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="quantity" Type="float" />
+          <Property Name="min_quantity" Type="float" />
+          <Property Name="cat_id" Type="int" />
+          <Property Name="cat_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="price" Type="float" />
+          <Property Name="size" Type="nvarchar" MaxLength="50" />
+          <Property Name="buy_price" Type="float" />
+          <Property Name="roleType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="perc_destroy" Type="float" />
+        </EntityType>
+        <EntityType Name="stock_destroy">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="product_id" Type="int" />
+          <Property Name="product_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="quantity" Type="float" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="user_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="typeRole" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="id_item" Type="int" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="user_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" />
+          <Property Name="role" Type="nvarchar" MaxLength="50" />
+          <Property Name="typeRole" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="FactoryDBModelStoreContainer">
+          <EntitySet Name="bank" EntityType="Self.bank" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="bank_account" EntityType="Self.bank_account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="customer" EntityType="Self.customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="customer_account" EntityType="Self.customer_account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="destroy_inv" EntityType="Self.destroy_inv" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="destroy_invoices" EntityType="Self.destroy_invoices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="import" EntityType="Self.import" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="import_items" EntityType="Self.import_items" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="importer" EntityType="Self.importer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="importer_account" EntityType="Self.importer_account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="invoice" EntityType="Self.invoice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="invoice_items" EntityType="Self.invoice_items" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="payment" EntityType="Self.payment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="return_items" EntityType="Self.return_items" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="returninv" EntityType="Self.returninv" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SalesMen" EntityType="Self.SalesMen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="savee" EntityType="Self.savee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="stock" EntityType="Self.stock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="stock_destroy" EntityType="Self.stock_destroy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FactoryDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="bank">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="value" Type="Double" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="BankName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="roleType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bank_account">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bank_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="bank_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="daan" Type="Double" />
+          <Property Name="mdeen" Type="Double" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="datep" Type="DateTime" Precision="3" />
+          <Property Name="typeRole" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="roleType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="balance" Type="Double" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="roleType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="customer_account">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="customer_id" Type="Int32" />
+          <Property Name="total" Type="Double" />
+          <Property Name="pay" Type="Double" />
+          <Property Name="repay" Type="Double" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="user_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="inv_id" Type="Int32" />
+          <Property Name="img" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="import">
+          <Key>
+            <PropertyRef Name="add_id" />
+          </Key>
+          <Property Name="id" Type="Int32" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="total" Type="Double" />
+          <Property Name="importer_id" Type="Int32" />
+          <Property Name="discount" Type="Double" />
+          <Property Name="Net_total" Type="Double" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="user_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="importer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="add_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="roleType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="payedvalue" Type="Double" />
+        </EntityType>
+        <EntityType Name="import_items">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="imp_id" Type="Int32" />
+          <Property Name="prod_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="prod_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="quantity" Type="Double" />
+          <Property Name="price" Type="Double" />
+          <Property Name="total" Type="Double" />
+          <Property Name="status" Type="Int32" />
+          <Property Name="ex_date" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="importer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="balance" Type="Double" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="value" Type="Double" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="roleType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="importer_account">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="importer_id" Type="Int32" />
+          <Property Name="importer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="daan" Type="Double" />
+          <Property Name="mdeen" Type="Double" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="user_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="inv_id" Type="Int32" />
+        </EntityType>
+        <EntityType Name="invoice">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="total" Type="Double" />
+          <Property Name="customer_id" Type="Int32" />
+          <Property Name="discount" Type="Double" />
+          <Property Name="Nettotal" Type="Double" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="user_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="customer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="typeRole" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="img" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="casherid" Type="Int32" />
+          <Property Name="casherName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="payed" Type="Double" />
+          <Property Name="inv_id" Type="Int32" />
+        </EntityType>
+        <EntityType Name="invoice_items">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="inv_id" Type="Int32" />
+          <Property Name="prod_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="prod_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="quantity" Type="Double" />
+          <Property Name="price" Type="Double" />
+          <Property Name="cost" Type="Double" />
+          <Property Name="total" Type="Double" />
+          <Property Name="status" Type="Int32" />
+          <Property Name="NetTotal" Type="Double" />
+        </EntityType>
+        <EntityType Name="payment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="value" Type="Double" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="inv_id" Type="Int32" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="user_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="roleType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="img" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="return_items">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="return_id" Type="Int32" />
+          <Property Name="prod_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="prod_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="quantity" Type="Double" />
+          <Property Name="price" Type="Double" />
+          <Property Name="total" Type="Double" />
+          <Property Name="status" Type="Int32" />
+          <Property Name="roleType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="returninv">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="total" Type="Double" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="user_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="roleType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="inv_id" Type="Int32" />
+        </EntityType>
+        <EntityType Name="savee">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="daan" Type="Double" />
+          <Property Name="mdeen" Type="Double" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="user_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="item_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Operation_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="roleType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="stock">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="quantity" Type="Double" />
+          <Property Name="min_quantity" Type="Double" />
+          <Property Name="cat_id" Type="Int32" />
+          <Property Name="cat_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="price" Type="Double" />
+          <Property Name="size" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="buy_price" Type="Double" />
+          <Property Name="roleType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="perc_destroy" Type="Double" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="user_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="typeRole" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="FactoryDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="bank" EntityType="Self.bank" />
+          <EntitySet Name="bank_account" EntityType="Self.bank_account" />
+          <EntitySet Name="category" EntityType="Self.category" />
+          <EntitySet Name="customer" EntityType="Self.customer" />
+          <EntitySet Name="customer_account" EntityType="Self.customer_account" />
+          <EntitySet Name="import" EntityType="Self.import" />
+          <EntitySet Name="import_items" EntityType="Self.import_items" />
+          <EntitySet Name="importer" EntityType="Self.importer" />
+          <EntitySet Name="importer_account" EntityType="Self.importer_account" />
+          <EntitySet Name="invoice" EntityType="Self.invoice" />
+          <EntitySet Name="invoice_items" EntityType="Self.invoice_items" />
+          <EntitySet Name="payment" EntityType="Self.payment" />
+          <EntitySet Name="return_items" EntityType="Self.return_items" />
+          <EntitySet Name="returninv" EntityType="Self.returninv" />
+          <EntitySet Name="savee" EntityType="Self.savee" />
+          <EntitySet Name="stock" EntityType="Self.stock" />
+          <EntitySet Name="users" EntityType="Self.users" />
+          <EntitySet Name="SalesMen" EntityType="FactoryDBModel.SalesMen" />
+          <EntitySet Name="stock_destroy" EntityType="FactoryDBModel.stock_destroy" />
+          <EntitySet Name="destroy_inv" EntityType="FactoryDBModel.destroy_inv" />
+          <EntitySet Name="destroy_invoices" EntityType="FactoryDBModel.destroy_invoices" />
+        </EntityContainer>
+        <EntityType Name="SalesMen">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="roleType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="stock_destroy">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="product_id" Type="Int32" />
+          <Property Name="product_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="quantity" Type="Double" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="user_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="typeRole" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="id_item" Type="Int32" />
+        </EntityType>
+        <EntityType Name="destroy_inv">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="prod_id" Type="Int32" />
+          <Property Name="prod_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="inv_id" Type="Int32" />
+          <Property Name="stat" Type="Int32" />
+          <Property Name="roleType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="quant" Type="Double" />
+          <Property Name="item_total" Type="Double" />
+        </EntityType>
+        <EntityType Name="destroy_invoices">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date_destroy_inv" Type="DateTime" Precision="3" />
+          <Property Name="total" Type="Double" />
+          <Property Name="running_price" Type="Double" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="user_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="roletype" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="recycled_item" Type="Int32" />
+          <Property Name="recycled_item_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="recycled_quantity" Type="Double" />
+          <Property Name="rec_id" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FactoryDBModelStoreContainer" CdmEntityContainer="FactoryDBEntities">
+          <EntitySetMapping Name="bank">
+            <EntityTypeMapping TypeName="FactoryDBModel.bank">
+              <MappingFragment StoreEntitySet="bank">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="roleType" ColumnName="roleType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bank_account">
+            <EntityTypeMapping TypeName="FactoryDBModel.bank_account">
+              <MappingFragment StoreEntitySet="bank_account">
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="bank_name" ColumnName="bank_name" />
+                <ScalarProperty Name="bank_id" ColumnName="bank_id" />
+                <ScalarProperty Name="daan" ColumnName="daan" />
+                <ScalarProperty Name="mdeen" ColumnName="mdeen" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="datep" ColumnName="datep" />
+                <ScalarProperty Name="typeRole" ColumnName="typeRole" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="category">
+            <EntityTypeMapping TypeName="FactoryDBModel.category">
+              <MappingFragment StoreEntitySet="category">
+                <ScalarProperty Name="roleType" ColumnName="roleType" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="customer">
+            <EntityTypeMapping TypeName="FactoryDBModel.customer">
+              <MappingFragment StoreEntitySet="customer">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="balance" ColumnName="balance" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="roleType" ColumnName="roleType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="customer_account">
+            <EntityTypeMapping TypeName="FactoryDBModel.customer_account">
+              <MappingFragment StoreEntitySet="customer_account">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="pay" ColumnName="pay" />
+                <ScalarProperty Name="repay" ColumnName="repay" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="inv_id" ColumnName="inv_id" />
+                <ScalarProperty Name="img" ColumnName="img" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="import">
+            <EntityTypeMapping TypeName="FactoryDBModel.import">
+              <MappingFragment StoreEntitySet="import">
+                <ScalarProperty Name="payedvalue" ColumnName="payedvalue" />
+                <ScalarProperty Name="roleType" ColumnName="roleType" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="importer_id" ColumnName="importer_id" />
+                <ScalarProperty Name="discount" ColumnName="discount" />
+                <ScalarProperty Name="Net_total" ColumnName="Net_total" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="importer_name" ColumnName="importer_name" />
+                <ScalarProperty Name="add_id" ColumnName="add_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="import_items">
+            <EntityTypeMapping TypeName="FactoryDBModel.import_items">
+              <MappingFragment StoreEntitySet="import_items">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="imp_id" ColumnName="imp_id" />
+                <ScalarProperty Name="prod_code" ColumnName="prod_code" />
+                <ScalarProperty Name="prod_name" ColumnName="prod_name" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="ex_date" ColumnName="ex_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="importer">
+            <EntityTypeMapping TypeName="FactoryDBModel.importer">
+              <MappingFragment StoreEntitySet="importer">
+                <ScalarProperty Name="roleType" ColumnName="roleType" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="balance" ColumnName="balance" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="importer_account">
+            <EntityTypeMapping TypeName="FactoryDBModel.importer_account">
+              <MappingFragment StoreEntitySet="importer_account">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="importer_id" ColumnName="importer_id" />
+                <ScalarProperty Name="importer_name" ColumnName="importer_name" />
+                <ScalarProperty Name="daan" ColumnName="daan" />
+                <ScalarProperty Name="mdeen" ColumnName="mdeen" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="inv_id" ColumnName="inv_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="invoice">
+            <EntityTypeMapping TypeName="FactoryDBModel.invoice">
+              <MappingFragment StoreEntitySet="invoice">
+                <ScalarProperty Name="inv_id" ColumnName="inv_id" />
+                <ScalarProperty Name="payed" ColumnName="payed" />
+                <ScalarProperty Name="casherName" ColumnName="casherName" />
+                <ScalarProperty Name="casherid" ColumnName="casherid" />
+                <ScalarProperty Name="img" ColumnName="img" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="discount" ColumnName="discount" />
+                <ScalarProperty Name="Nettotal" ColumnName="Nettotal" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="customer_name" ColumnName="customer_name" />
+                <ScalarProperty Name="typeRole" ColumnName="typeRole" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="invoice_items">
+            <EntityTypeMapping TypeName="FactoryDBModel.invoice_items">
+              <MappingFragment StoreEntitySet="invoice_items">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="inv_id" ColumnName="inv_id" />
+                <ScalarProperty Name="prod_code" ColumnName="prod_code" />
+                <ScalarProperty Name="prod_name" ColumnName="prod_name" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="NetTotal" ColumnName="NetTotal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="payment">
+            <EntityTypeMapping TypeName="FactoryDBModel.payment">
+              <MappingFragment StoreEntitySet="payment">
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="img" ColumnName="img" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="notes" ColumnName="notes" />
+                <ScalarProperty Name="inv_id" ColumnName="inv_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="roleType" ColumnName="roleType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="return_items">
+            <EntityTypeMapping TypeName="FactoryDBModel.return_items">
+              <MappingFragment StoreEntitySet="return_items">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="return_id" ColumnName="return_id" />
+                <ScalarProperty Name="prod_code" ColumnName="prod_code" />
+                <ScalarProperty Name="prod_name" ColumnName="prod_name" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="roleType" ColumnName="roleType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="returninv">
+            <EntityTypeMapping TypeName="FactoryDBModel.returninv">
+              <MappingFragment StoreEntitySet="returninv">
+                <ScalarProperty Name="inv_id" ColumnName="inv_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="roleType" ColumnName="roleType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="savee">
+            <EntityTypeMapping TypeName="FactoryDBModel.savee">
+              <MappingFragment StoreEntitySet="savee">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="daan" ColumnName="daan" />
+                <ScalarProperty Name="mdeen" ColumnName="mdeen" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="item_id" ColumnName="item_id" />
+                <ScalarProperty Name="Operation_type" ColumnName="Operation_type" />
+                <ScalarProperty Name="roleType" ColumnName="roleType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="stock">
+            <EntityTypeMapping TypeName="FactoryDBModel.stock">
+              <MappingFragment StoreEntitySet="stock">
+                <ScalarProperty Name="perc_destroy" ColumnName="perc_destroy" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="min_quantity" ColumnName="min_quantity" />
+                <ScalarProperty Name="cat_id" ColumnName="cat_id" />
+                <ScalarProperty Name="cat_name" ColumnName="cat_name" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="size" ColumnName="size" />
+                <ScalarProperty Name="buy_price" ColumnName="buy_price" />
+                <ScalarProperty Name="roleType" ColumnName="roleType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="FactoryDBModel.users">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="typeRole" ColumnName="typeRole" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalesMen">
+            <EntityTypeMapping TypeName="FactoryDBModel.SalesMen">
+              <MappingFragment StoreEntitySet="SalesMen">
+                <ScalarProperty Name="roleType" ColumnName="roleType" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="stock_destroy">
+            <EntityTypeMapping TypeName="FactoryDBModel.stock_destroy">
+              <MappingFragment StoreEntitySet="stock_destroy">
+                <ScalarProperty Name="id_item" ColumnName="id_item" />
+                <ScalarProperty Name="typeRole" ColumnName="typeRole" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="product_name" ColumnName="product_name" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="destroy_inv">
+            <EntityTypeMapping TypeName="FactoryDBModel.destroy_inv">
+              <MappingFragment StoreEntitySet="destroy_inv">
+                <ScalarProperty Name="item_total" ColumnName="item_total" />
+                <ScalarProperty Name="quant" ColumnName="quant" />
+                <ScalarProperty Name="roleType" ColumnName="roleType" />
+                <ScalarProperty Name="stat" ColumnName="stat" />
+                <ScalarProperty Name="inv_id" ColumnName="inv_id" />
+                <ScalarProperty Name="prod_name" ColumnName="prod_name" />
+                <ScalarProperty Name="prod_id" ColumnName="prod_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="destroy_invoices">
+            <EntityTypeMapping TypeName="FactoryDBModel.destroy_invoices">
+              <MappingFragment StoreEntitySet="destroy_invoices">
+                <ScalarProperty Name="rec_id" ColumnName="rec_id" />
+                <ScalarProperty Name="recycled_quantity" ColumnName="recycled_quantity" />
+                <ScalarProperty Name="recycled_item_name" ColumnName="recycled_item_name" />
+                <ScalarProperty Name="recycled_item" ColumnName="recycled_item" />
+                <ScalarProperty Name="roletype" ColumnName="roletype" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="running_price" ColumnName="running_price" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="date_destroy_inv" ColumnName="date_destroy_inv" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
